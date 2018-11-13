@@ -40,7 +40,7 @@ namespace MantenimientoTest
         private void RellenarDataGrid(DataSet dataset)
         {
 
-            dataGridView1.DataSource = dataset.Tables[0];
+            dgvMant_table.DataSource = dataset.Tables[0];
             BindDades();
         }
 
@@ -60,11 +60,11 @@ namespace MantenimientoTest
                 if (control is SdsTextBox)
                 {
                     ((SdsTextBox)control).DataBindings.Clear();
-                    ((SdsTextBox)control).DataBindings.Add("Text", dts.Tables[0], columNames[i]);
+                    ((SdsTextBox)control).DataBindings.Add("Text", dts.Tables[0], ((SdsTextBox)control).ColumnName.ToString());
                     ((SdsTextBox)control).Validated += new EventHandler(validar);
                     i--;
                 }
-                dataGridView1.DataSource = dts.Tables[0];
+                dgvMant_table.DataSource = dts.Tables[0];
             }
         }
         private void validar(object sender, EventArgs e)
