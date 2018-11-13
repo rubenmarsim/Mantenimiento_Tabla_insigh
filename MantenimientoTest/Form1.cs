@@ -16,25 +16,23 @@ namespace MantenimientoTest
     {
 
         DataSet dts;
-        SdsTextBox tb;
-        ClassDB db;
+        SdsTextBox CSDStxtBox;
+        ClassDB CDB;
+
 
         public Form1()
         {
 
             InitializeComponent();
-            InicializarCosas();
+            Inicializaciones();
         }
 
-        private void InicializarCosas()
+        private void Inicializaciones()
         {
-            db = new ClassDB();
-            tb = new SdsTextBox();
+            CDB = new ClassDB();
+            CSDStxtBox = new SdsTextBox();
 
-
-          
-
-            dts = db.portaPerConsulta("select * from UserTypes");
+            dts = CDB.portaPerConsulta("select * from UserTypes");
 
             RellenarDataGrid(dts);
         }
@@ -43,7 +41,6 @@ namespace MantenimientoTest
         {
 
             dataGridView1.DataSource = dataset.Tables[0];
-
             BindDades();
         }
 
@@ -58,13 +55,13 @@ namespace MantenimientoTest
             }
 
             i = 3;
-            foreach (Control c in this.Controls)
+            foreach (Control control in this.Controls)
             {
-                if (c is SdsTextBox)
+                if (control is SdsTextBox)
                 {
-                    ((SdsTextBox)c).DataBindings.Clear();
-                    ((SdsTextBox)c).DataBindings.Add("Text", dts.Tables[0], columNames[i]);
-                    ((SdsTextBox)c).Validated += new EventHandler(validar);
+                    ((SdsTextBox)control).DataBindings.Clear();
+                    ((SdsTextBox)control).DataBindings.Add("Text", dts.Tables[0], columNames[i]);
+                    ((SdsTextBox)control).Validated += new EventHandler(validar);
                     i--;
                 }
                 dataGridView1.DataSource = dts.Tables[0];
@@ -74,9 +71,10 @@ namespace MantenimientoTest
         {
             ((TextBox)sender).DataBindings[0].BindingManagerBase.EndCurrentEdit();
         }
-        private void button2_Click(object sender, EventArgs e)
+
+        private void btnModificar_Click(object sender, EventArgs e)
         {
-            db.Actualitzar(dts, "select * from UserTypes");
+            CDB.Actualitzar(dts, "select * from UserTypes");
         }
     }
 }
