@@ -85,6 +85,7 @@ namespace ConnectionClass
         {
             connectBD();
                 OleDbDataAdapter adapterDts = new OleDbDataAdapter(consulta, _ConnectionString);
+                OleDbCommandBuilder builder = new OleDbCommandBuilder(adapterDts);
             adapterDts.Update(dts, consulta);
         }
         catch (OleDbException e)
