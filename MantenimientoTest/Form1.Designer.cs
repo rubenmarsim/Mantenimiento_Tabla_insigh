@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvMant_table = new System.Windows.Forms.DataGridView();
             this.CodeTypeLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -37,16 +37,16 @@
             this.sdsTextBox3 = new MantenimientoTest.SdsTextBox();
             this.sdsTextBox2 = new MantenimientoTest.SdsTextBox();
             this.sdsTextBox1 = new MantenimientoTest.SdsTextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMant_table)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dgvMant_table
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(314, 160);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(406, 278);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvMant_table.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMant_table.Location = new System.Drawing.Point(314, 160);
+            this.dgvMant_table.Name = "dgvMant_table";
+            this.dgvMant_table.Size = new System.Drawing.Size(406, 278);
+            this.dgvMant_table.TabIndex = 0;
             // 
             // CodeTypeLabel
             // 
@@ -96,25 +96,28 @@
             // 
             // sdsTextBox3
             // 
+            this.sdsTextBox3.ColumnName = "LevelAcces";
             this.sdsTextBox3.Location = new System.Drawing.Point(56, 243);
             this.sdsTextBox3.Name = "sdsTextBox3";
-            this.sdsTextBox3.Nom = null;
+            this.sdsTextBox3.Nom = "";
             this.sdsTextBox3.Size = new System.Drawing.Size(100, 20);
             this.sdsTextBox3.TabIndex = 3;
             // 
             // sdsTextBox2
             // 
+            this.sdsTextBox2.ColumnName = "DescType";
             this.sdsTextBox2.Location = new System.Drawing.Point(56, 192);
             this.sdsTextBox2.Name = "sdsTextBox2";
-            this.sdsTextBox2.Nom = null;
+            this.sdsTextBox2.Nom = "";
             this.sdsTextBox2.Size = new System.Drawing.Size(100, 20);
             this.sdsTextBox2.TabIndex = 2;
             // 
             // sdsTextBox1
             // 
+            this.sdsTextBox1.ColumnName = "CodeType";
             this.sdsTextBox1.Location = new System.Drawing.Point(56, 143);
             this.sdsTextBox1.Name = "sdsTextBox1";
-            this.sdsTextBox1.Nom = null;
+            this.sdsTextBox1.Nom = "";
             this.sdsTextBox1.Size = new System.Drawing.Size(100, 20);
             this.sdsTextBox1.TabIndex = 1;
             this.sdsTextBox1.Tag = "CodeType";
@@ -132,10 +135,10 @@
             this.Controls.Add(this.sdsTextBox3);
             this.Controls.Add(this.sdsTextBox2);
             this.Controls.Add(this.sdsTextBox1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvMant_table);
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMant_table)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -143,7 +146,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvMant_table;
         private SdsTextBox sdsTextBox1;
         private SdsTextBox sdsTextBox2;
         private SdsTextBox sdsTextBox3;
