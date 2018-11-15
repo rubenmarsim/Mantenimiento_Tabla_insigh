@@ -26,10 +26,9 @@ namespace MantenimientoTest
         {
             CDB = new ClassDB();
             CSDStxtBox = new SdsTextBox();
-
             dts = CDB.portaPerConsulta("select * from UserTypes");
-
             RellenarDataGrid(dts);
+            dgvMant_table.AllowUserToAddRows = false;
         }
         private void RellenarDataGrid(DataSet dataset)
         {
@@ -49,13 +48,40 @@ namespace MantenimientoTest
                 dgvMant_table.DataSource = dts.Tables[0];
             }
         }
+        private void QuitarBindDades()
+        {
+            foreach (Control control in this.Controls)
+            {
+                if (control is SdsTextBox)
+                {
+                    ((SdsTextBox)control).DataBindings.Clear();
+                }
+            }
+        }
+        private void AñadirFila()
+        {
+
+            
+            DataTable table = dts.Tables[0];
+            DataRow row = table.NewRow();
+
+
+        }
         private void validar(object sender, EventArgs e)
         {
             ((TextBox)sender).DataBindings[0].BindingManagerBase.EndCurrentEdit();
         }
-        private void btnModificar_Click(object sender, EventArgs e)
+
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
             CDB.Actualitzar(dts, "select * from UserTypes");
+            BindDades();
+        }
+
+        private void btnInsert_Click(object sender, EventArgs e)
+        {
+            QuitarBindDades();
+            AñadirFila();
         }
     }
 }
