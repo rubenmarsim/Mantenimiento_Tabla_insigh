@@ -12,12 +12,13 @@ using ConnectionClass;
 
 namespace MantenimientoTest
 {
-    public partial class Form1 : Form
+    public partial class frmMant_Table : Form
     {
         DataSet dts;
         SdsTextBox CSDStxtBox;
         ClassDB CDB;
-        public Form1()
+        private bool EsNou = false;
+        public frmMant_Table()
         {
             InitializeComponent();
             Inicializaciones();
@@ -26,10 +27,9 @@ namespace MantenimientoTest
         {
             CDB = new ClassDB();
             CSDStxtBox = new SdsTextBox();
-
             dts = CDB.portaPerConsulta("select * from UserTypes");
-
             RellenarDataGrid(dts);
+            dgvMant_table.AllowUserToAddRows = false;
         }
         private void RellenarDataGrid(DataSet dataset)
         {
@@ -38,24 +38,74 @@ namespace MantenimientoTest
         }
         private void BindDades()
         {
-            foreach (Control control in this.Controls)
+            foreach (Control sdsControl in this.Controls)
             {
-                if (control is SdsTextBox)
+                if (sdsControl is SdsTextBox)
                 {
-                    ((SdsTextBox)control).DataBindings.Clear();
-                    ((SdsTextBox)control).DataBindings.Add("Text", dts.Tables[0], ((SdsTextBox)control).ColumnName.ToString());
-                    ((SdsTextBox)control).Validated += new EventHandler(validar);
+                    ((SdsTextBox)sdsControl).DataBindings.Clear();
+                    ((SdsTextBox)sdsControl).DataBindings.Add("Text", dts.Tables[0], ((SdsTextBox)sdsControl).ColumnName.ToString());
+                    ((SdsTextBox)sdsControl).Validated += new EventHandler(validar);
                 }
-                dgvMant_table.DataSource = dts.Tables[0];
             }
+        }
+        private void QuitarBindDades()
+        {
+            foreach (Control sdsControl in this.Controls)
+            {
+                if (sdsControl is SdsTextBox)
+                {
+                    ((SdsTextBox)sdsControl).DataBindings.Clear();
+                    sdsControl.Text = "";
+                        
+                }
+            }
+        }
+        private void AñadirFila()
+        {
+            DataRow dr = dts.Tables[0].NewRow();
+            foreach (Control sdsControl in this.Controls)
+            {
+                if (sdsControl is SdsTextBox)
+                {
+                    int i = 0;
+                    dr[i] = sdsControl.Text;
+                    i++;
+                }
+            }
+            dts.Tables[0].Rows.Add(dr);//NewRow(dr);//Add(dr);
+
+            //DataTable dt = dts.Tables[0];
+            //DataRow dr = dt.NewRow();
+            //dt.Rows.Add();
+            //dt.AcceptChanges();
+
         }
         private void validar(object sender, EventArgs e)
         {
             ((TextBox)sender).DataBindings[0].BindingManagerBase.EndCurrentEdit();
         }
-        private void btnModificar_Click(object sender, EventArgs e)
+
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
-            CDB.Actualitzar(dts, "select * from UserTypes");
+            if(!EsNou)
+            {
+                CDB.Actualitzar(dts, "select * from UserTypes");
+            }
+            else
+            {
+                AñadirFila();
+            }
+            
+        }
+
+        private void btnInsert_Click(object sender, EventArgs e)
+        {
+            QuitarBindDades();
+            EsNou = true;
+            //AñadirFila();
+            //BindDades();
+            //var dg_r = dgvMant_table.Rows.Count;
+
         }
     }
 }
