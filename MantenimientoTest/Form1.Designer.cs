@@ -1,6 +1,6 @@
 ﻿namespace MantenimientoTest
 {
-    partial class Form1
+    partial class frmMant_Table
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -123,7 +123,7 @@
             this.txtBoxCodeType.TabIndex = 1;
             this.txtBoxCodeType.Tag = "CodeType";
             // 
-            // Form1
+            // frmMant_Table
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -137,7 +137,7 @@
             this.Controls.Add(this.txtBoxDescType);
             this.Controls.Add(this.txtBoxCodeType);
             this.Controls.Add(this.dgvMant_table);
-            this.Name = "Form1";
+            this.Name = "frmMant_Table";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dgvMant_table)).EndInit();
             this.ResumeLayout(false);
