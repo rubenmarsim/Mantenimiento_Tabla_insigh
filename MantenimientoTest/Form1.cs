@@ -21,11 +21,15 @@ namespace MantenimientoTest
         private bool EsNou = false;
         const string query = "select * from UserTypes";
         #endregion
+
+        #region Constructores
         public frmMant_Table()
         {
             InitializeComponent();
             Inicializaciones();
         }
+        #endregion
+
         #region Metodos
         private void Inicializaciones()
         {
