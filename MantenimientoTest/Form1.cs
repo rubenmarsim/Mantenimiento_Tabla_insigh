@@ -17,13 +17,12 @@ namespace MantenimientoTest
         DataSet dts;
         SdsTextBox CSDStxtBox;
         ClassDB CDB;
+        private bool EsNou = false;
         public frmMant_Table()
         {
             InitializeComponent();
             Inicializaciones();
         }
-        private bool EsNou = false;
-
         private void Inicializaciones()
         {
             CDB = new ClassDB();
