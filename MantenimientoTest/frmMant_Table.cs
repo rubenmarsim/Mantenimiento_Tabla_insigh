@@ -16,10 +16,12 @@ namespace MantenimientoTest
     {
         #region Variables
         DataSet dts;
+        DataSet dts2;
         SdsTextBox CSDStxtBox;
         ClassDB CDB;
         private bool bEsNou = false;
         const string query = "select * from UserTypes";
+        const string id = "IdUserType";
         #endregion
 
         #region Constructores
@@ -41,6 +43,7 @@ namespace MantenimientoTest
         private void RellenarDataGrid(DataSet dataset)
         {
             dgvMant_table.DataSource = dts.Tables[0];
+            this.dgvMant_table.Columns[id].Visible = false;
             BindDades();
         }
         private void BindDades()
