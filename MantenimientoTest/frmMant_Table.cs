@@ -18,8 +18,8 @@ namespace MantenimientoTest
         DataSet dts;
         SdsTextBox CSDStxtBox;
         ClassDB CDB;
-        private bool EsNou = false;
-        const string _query = "select * from UserTypes";
+        private bool bEsNou = false;
+        const string query = "select * from UserTypes";
         #endregion
 
         #region Constructores
@@ -34,7 +34,7 @@ namespace MantenimientoTest
         {
             CDB = new ClassDB();
             CSDStxtBox = new SdsTextBox();
-            dts = CDB.portaPerConsulta(_query);
+            dts = CDB.portaPerConsulta(query);
             RellenarDataGrid(dts);
             dgvMant_table.AllowUserToAddRows = false;
         }
@@ -86,7 +86,7 @@ namespace MantenimientoTest
         #region Eventos
         private void validar(object sender, EventArgs e)
         {
-            if (!EsNou)
+            if (!bEsNou)
             {
                 ((TextBox)sender).DataBindings[0].BindingManagerBase.EndCurrentEdit();
             }        
@@ -94,14 +94,14 @@ namespace MantenimientoTest
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (!EsNou)
+            if (!bEsNou)
             {
-                CDB.Actualitzar(dts, _query);
+                CDB.Actualitzar(dts, query);
             }
             else
             {
                 AñadirFila();
-                CDB.Actualitzar(dts, _query);
+                CDB.Actualitzar(dts, query);
                 BindDades();
             }
         }
@@ -109,7 +109,7 @@ namespace MantenimientoTest
         private void btnInsert_Click(object sender, EventArgs e)
         {
             QuitarBindDades();
-            EsNou = true;
+            bEsNou = true;
             txtBoxCodeType.Focus();
 
         }
