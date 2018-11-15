@@ -14,15 +14,19 @@ namespace MantenimientoTest
 {
     public partial class frmMant_Table : Form
     {
+        #region Variables
         DataSet dts;
         SdsTextBox CSDStxtBox;
         ClassDB CDB;
         private bool EsNou = false;
+        const string query = "select * from UserTypes";
+        #endregion
         public frmMant_Table()
         {
             InitializeComponent();
             Inicializaciones();
         }
+        #region Metodos
         private void Inicializaciones()
         {
             CDB = new ClassDB();
@@ -80,6 +84,9 @@ namespace MantenimientoTest
             //dt.AcceptChanges();
 
         }
+        #endregion
+
+        #region Eventos
         private void validar(object sender, EventArgs e)
         {
             ((TextBox)sender).DataBindings[0].BindingManagerBase.EndCurrentEdit();
@@ -87,15 +94,15 @@ namespace MantenimientoTest
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if(!EsNou)
+            if (!EsNou)
             {
-                CDB.Actualitzar(dts, "select * from UserTypes");
+                CDB.Actualitzar(dts, query);
             }
             else
             {
                 AñadirFila();
             }
-            
+
         }
 
         private void btnInsert_Click(object sender, EventArgs e)
@@ -107,5 +114,6 @@ namespace MantenimientoTest
             //var dg_r = dgvMant_table.Rows.Count;
 
         }
+        #endregion
     }
 }
