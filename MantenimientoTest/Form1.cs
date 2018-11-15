@@ -47,7 +47,6 @@ namespace MantenimientoTest
                     ((SdsTextBox)sdsControl).DataBindings.Add("Text", dts.Tables[0], ((SdsTextBox)sdsControl).ColumnName.ToString());
                     ((SdsTextBox)sdsControl).Validated += new EventHandler(validar);
                 }
-                dgvMant_table.DataSource = dts.Tables[0];
             }
         }
         private void QuitarBindDades()
@@ -64,12 +63,22 @@ namespace MantenimientoTest
         }
         private void AñadirFila()
         {
+            DataRow dr = dts.Tables[0].NewRow();
+            foreach (Control sdsControl in this.Controls)
+            {
+                if (sdsControl is SdsTextBox)
+                {
+                    int i = 0;
+                    dr[i] = sdsControl.Text;
+                    i++;
+                }
+            }
+            dts.Tables[0].Rows.Add(dr);//NewRow(dr);//Add(dr);
 
-            
-            DataTable dt = dts.Tables[0];
-            DataRow dr = dt.NewRow();
-            dt.Rows.Add();
-            dt.AcceptChanges();
+            //DataTable dt = dts.Tables[0];
+            //DataRow dr = dt.NewRow();
+            //dt.Rows.Add();
+            //dt.AcceptChanges();
 
         }
         private void validar(object sender, EventArgs e)
@@ -82,11 +91,10 @@ namespace MantenimientoTest
             if(!EsNou)
             {
                 CDB.Actualitzar(dts, "select * from UserTypes");
-            
             }
             else
             {
-
+                AñadirFila();
             }
             
         }
