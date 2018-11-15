@@ -81,6 +81,7 @@ namespace MantenimientoTest
                 }
             }
             dts.Tables[0].Rows.Add(dr);//NewRow(dr);//Add(dr);
+            dts.AcceptChanges();
 
             //DataTable dt = dts.Tables[0];
             //DataRow dr = dt.NewRow();
@@ -113,6 +114,7 @@ namespace MantenimientoTest
         {
             QuitarBindDades();
             EsNou = true;
+            txtBoxCodeType.Focus();
             //AñadirFila();
             //BindDades();
             //var dg_r = dgvMant_table.Rows.Count;
