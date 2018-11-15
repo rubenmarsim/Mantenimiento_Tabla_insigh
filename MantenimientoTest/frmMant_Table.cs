@@ -19,7 +19,7 @@ namespace MantenimientoTest
         SdsTextBox CSDStxtBox;
         ClassDB CDB;
         private bool EsNou = false;
-        const string query = "select * from UserTypes";
+        const string _query = "select * from UserTypes";
         #endregion
 
         #region Constructores
@@ -34,13 +34,13 @@ namespace MantenimientoTest
         {
             CDB = new ClassDB();
             CSDStxtBox = new SdsTextBox();
-            dts = CDB.portaPerConsulta(query);
+            dts = CDB.portaPerConsulta(_query);
             RellenarDataGrid(dts);
             dgvMant_table.AllowUserToAddRows = false;
         }
         private void RellenarDataGrid(DataSet dataset)
         {
-            dgvMant_table.DataSource = dataset.Tables[0];
+            dgvMant_table.DataSource = dts.Tables[0];
             BindDades();
         }
         private void BindDades()
@@ -96,12 +96,13 @@ namespace MantenimientoTest
         {
             if (!EsNou)
             {
-                CDB.Actualitzar(dts, query);
+                CDB.Actualitzar(dts, _query);
             }
             else
             {
                 AñadirFila();
-                CDB.Actualitzar(dts, query);
+                CDB.Actualitzar(dts, _query);
+                BindDades();
             }
         }
 
