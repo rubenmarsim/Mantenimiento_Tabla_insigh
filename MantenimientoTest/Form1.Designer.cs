@@ -139,6 +139,7 @@
             this.Controls.Add(this.dgvMant_table);
             this.Name = "frmMant_Table";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.frmMant_Table_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMant_table)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

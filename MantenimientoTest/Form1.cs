@@ -26,7 +26,6 @@ namespace MantenimientoTest
         public frmMant_Table()
         {
             InitializeComponent();
-            Inicializaciones();
         }
         #endregion
 
@@ -35,7 +34,7 @@ namespace MantenimientoTest
         {
             CDB = new ClassDB();
             CSDStxtBox = new SdsTextBox();
-            dts = CDB.portaPerConsulta("select * from UserTypes");
+            dts = CDB.portaPerConsulta(query);
             RellenarDataGrid(dts);
             dgvMant_table.AllowUserToAddRows = false;
         }
@@ -63,37 +62,34 @@ namespace MantenimientoTest
                 if (sdsControl is SdsTextBox)
                 {
                     ((SdsTextBox)sdsControl).DataBindings.Clear();
-                    sdsControl.Text = "";
-                        
+                    sdsControl.Text = "";             
                 }
             }
         }
         private void AñadirFila()
         {
+            string nomCamp = ""; 
             DataRow dr = dts.Tables[0].NewRow();
             foreach (Control sdsControl in this.Controls)
             {
                 if (sdsControl is SdsTextBox)
                 {
-                    int i = 0;
-                    dr[i] = sdsControl.Text;
-                    i++;
+                    nomCamp = ((SdsTextBox)sdsControl).ColumnName;
+                    dr[nomCamp] = sdsControl.Text;
+                    
                 }
             }
-            dts.Tables[0].Rows.Add(dr);//NewRow(dr);//Add(dr);
-
-            //DataTable dt = dts.Tables[0];
-            //DataRow dr = dt.NewRow();
-            //dt.Rows.Add();
-            //dt.AcceptChanges();
-
+            dts.Tables[0].Rows.Add(dr);
         }
         #endregion
 
         #region Eventos
         private void validar(object sender, EventArgs e)
         {
-            ((TextBox)sender).DataBindings[0].BindingManagerBase.EndCurrentEdit();
+            if (!EsNou)
+            {
+                ((TextBox)sender).DataBindings[0].BindingManagerBase.EndCurrentEdit();
+            }        
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -105,18 +101,20 @@ namespace MantenimientoTest
             else
             {
                 AñadirFila();
+                CDB.Actualitzar(dts, query);
             }
-
         }
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
             QuitarBindDades();
             EsNou = true;
-            //AñadirFila();
-            //BindDades();
-            //var dg_r = dgvMant_table.Rows.Count;
+            txtBoxCodeType.Focus();
 
+        }
+        private void frmMant_Table_Load(object sender, EventArgs e)
+        {
+            Inicializaciones();
         }
         #endregion
     }
